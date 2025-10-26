@@ -115,26 +115,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl shadow-2xl overflow-hidden">
-          <div className="px-8 py-16 sm:px-16 text-center">
-            <h2 className="text-4xl font-extrabold text-white mb-6">
-              Ready to visualize your data?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of users who are making smarter decisions with DataViz Pro.
-              Start your journey today.
-            </p>
-            <Link
-              to="/signup"
-              className="inline-block px-10 py-4 bg-white text-blue-600 rounded-xl font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-200 shadow-xl"
-            >
-              Start Free Trial
-            </Link>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 }

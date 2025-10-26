@@ -3,46 +3,37 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import datetime, timedelta
 from typing import Optional
-from bson import ObjectId
 import jwt
 import bcrypt
 import pandas as pd
 import io
 import os
+import json
 from pydantic import BaseModel, EmailStr
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Configuration
+SECRET_KEY = "your-secret-key-change-in-production-12345678"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-# Import database configuration
-from database import (
-    connect_to_mongodb,
-    close_mongodb_connection,
-    get_users_collection,
-    get_datasets_collection,
-    create_indexes
-)
+# File paths for local storage
+USERS_FILE = "users.json"
+DATASETS_FILE = "datasets.json"
 
-# Configuration from environment variables
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
+# Initialize storage files
+def init_storage():
+    """Initialize JSON storage files if they don't exist"""
+    if not os.path.exists(USERS_FILE):
+        with open(USERS_FILE, 'w') as f:
+            json.dump({}, f)
+    if not os.path.exists(DATASETS_FILE):
+        with open(DATASETS_FILE, 'w') as f:
+            json.dump({}, f)
+
+init_storage()
 
 # Initialize FastAPI
-app = FastAPI(title="DataViz Pro API - MongoDB", version="2.0.0")
-
-# Startup and shutdown events
-@app.on_event("startup")
-async def startup_db_client():
-    """Connect to MongoDB on startup"""
-    await connect_to_mongodb()
-    await create_indexes()
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    """Close MongoDB connection on shutdown"""
-    await close_mongodb_connection()
+app = FastAPI(title="DataViz Pro API", version="1.0.0")
 
 # CORS middleware
 app.add_middleware(
@@ -69,6 +60,27 @@ class UserResponse(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+# Helper Functions - Storage
+def read_users():
+    """Read users from JSON file"""
+    with open(USERS_FILE, 'r') as f:
+        return json.load(f)
+
+def write_users(users):
+    """Write users to JSON file"""
+    with open(USERS_FILE, 'w') as f:
+        json.dump(users, f, indent=2)
+
+def read_datasets():
+    """Read datasets from JSON file"""
+    with open(DATASETS_FILE, 'r') as f:
+        return json.load(f)
+
+def write_datasets(datasets):
+    """Write datasets to JSON file"""
+    with open(DATASETS_FILE, 'w') as f:
+        json.dump(datasets, f, indent=2)
 
 # Helper Functions - Authentication
 def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -107,68 +119,62 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     except jwt.PyJWTError:
         raise credentials_exception
     
-    # Get user from MongoDB
-    users = get_users_collection()
-    user = await users.find_one({"email": email})
-    
-    if not user:
+    users = read_users()
+    if email not in users:
         raise credentials_exception
     
-    return {"email": user["email"], "role": user["role"]}
+    user_data = users[email]
+    return {"email": email, "role": user_data["role"]}
 
 # Routes - Health Check
 @app.get("/")
 def root():
     """Health check endpoint"""
     return {
-        "message": "DataViz Pro API is running with MongoDB",
-        "version": "2.0.0",
-        "status": "healthy",
-        "database": "MongoDB Atlas"
+        "message": "DataViz Pro API is running",
+        "version": "1.0.0",
+        "status": "healthy"
     }
 
 # Routes - Authentication
 @app.post("/auth/signup", response_model=UserResponse)
 async def signup(user: UserCreate):
     """Create a new user account"""
-    users = get_users_collection()
+    users = read_users()
     
     # Check if user already exists
-    existing_user = await users.find_one({"email": user.email})
-    if existing_user:
+    if user.email in users:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email already registered"
         )
     
-    # Create new user document
+    # Create new user
     hashed_password = get_password_hash(user.password)
-    user_doc = {
-        "email": user.email,
+    users[user.email] = {
         "hashed_password": hashed_password,
         "role": user.role,
-        "created_at": datetime.utcnow()
+        "created_at": datetime.utcnow().isoformat()
     }
     
-    # Insert into MongoDB
-    result = await users.insert_one(user_doc)
+    write_users(users)
     
     return UserResponse(email=user.email, role=user.role)
 
 @app.post("/auth/token", response_model=Token)
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     """Login and get JWT token"""
-    users = get_users_collection()
+    users = read_users()
     
-    # Find user in MongoDB
-    user = await users.find_one({"email": form_data.username})
-    
-    if not user:
+    # Check if user exists
+    if form_data.username not in users:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+    
+    user = users[form_data.username]
     
     # Verify password
     if not verify_password(form_data.password, user["hashed_password"]):
@@ -181,7 +187,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     # Create access token
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user["email"]}, 
+        data={"sub": form_data.username}, 
         expires_delta=access_token_expires
     )
     
@@ -235,11 +241,14 @@ async def upload_file(
     
     data_dict = df.to_dict('records')
     
-    # Create dataset document for MongoDB
-    dataset_doc = {
+    # Store in local file
+    datasets = read_datasets()
+    dataset_id = str(len(datasets) + 1)
+    
+    datasets[dataset_id] = {
         "filename": file.filename,
         "user_email": current_user["email"],
-        "upload_date": datetime.utcnow(),
+        "upload_date": datetime.utcnow().isoformat(),
         "row_count": len(df),
         "column_count": len(df.columns),
         "columns": df.columns.tolist(),
@@ -247,13 +256,11 @@ async def upload_file(
         "data": data_dict
     }
     
-    # Insert into MongoDB
-    datasets = get_datasets_collection()
-    result = await datasets.insert_one(dataset_doc)
+    write_datasets(datasets)
     
     return {
         "message": "File uploaded successfully",
-        "dataset_id": str(result.inserted_id),
+        "dataset_id": dataset_id,
         "filename": file.filename,
         "rows": len(df),
         "columns": len(df.columns)
@@ -262,24 +269,19 @@ async def upload_file(
 @app.get("/data/datasets")
 async def get_datasets(current_user: dict = Depends(get_current_user)):
     """Get all datasets for current user"""
-    datasets = get_datasets_collection()
-    
-    # Find all datasets for current user
-    cursor = datasets.find(
-        {"user_email": current_user["email"]},
-        {"data": 0}  # Exclude the data field for performance
-    ).sort("upload_date", -1)  # Sort by newest first
+    datasets = read_datasets()
     
     user_datasets = []
-    async for dataset in cursor:
-        user_datasets.append({
-            "id": str(dataset["_id"]),
-            "filename": dataset["filename"],
-            "upload_date": dataset["upload_date"].isoformat(),
-            "row_count": dataset["row_count"],
-            "column_count": dataset["column_count"],
-            "file_size": dataset["file_size"]
-        })
+    for dataset_id, data in datasets.items():
+        if data["user_email"] == current_user["email"]:
+            user_datasets.append({
+                "id": dataset_id,
+                "filename": data["filename"],
+                "upload_date": data["upload_date"],
+                "row_count": data["row_count"],
+                "column_count": data["column_count"],
+                "file_size": data["file_size"]
+            })
     
     return user_datasets
 
@@ -291,25 +293,15 @@ async def get_dataset_data(
     current_user: dict = Depends(get_current_user)
 ):
     """Get paginated dataset data"""
-    datasets = get_datasets_collection()
+    datasets = read_datasets()
     
-    # Convert string ID to ObjectId
-    try:
-        obj_id = ObjectId(dataset_id)
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid dataset ID format"
-        )
-    
-    # Find dataset
-    dataset = await datasets.find_one({"_id": obj_id})
-    
-    if not dataset:
+    if dataset_id not in datasets:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Dataset not found"
         )
+    
+    dataset = datasets[dataset_id]
     
     # Verify ownership
     if dataset["user_email"] != current_user["email"]:
@@ -337,25 +329,15 @@ async def get_dataset_metadata(
     current_user: dict = Depends(get_current_user)
 ):
     """Get dataset metadata without data"""
-    datasets = get_datasets_collection()
+    datasets = read_datasets()
     
-    # Convert string ID to ObjectId
-    try:
-        obj_id = ObjectId(dataset_id)
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid dataset ID format"
-        )
-    
-    # Find dataset (exclude data field)
-    dataset = await datasets.find_one({"_id": obj_id}, {"data": 0})
-    
-    if not dataset:
+    if dataset_id not in datasets:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Dataset not found"
         )
+    
+    dataset = datasets[dataset_id]
     
     if dataset["user_email"] != current_user["email"]:
         raise HTTPException(
@@ -364,9 +346,9 @@ async def get_dataset_metadata(
         )
     
     return {
-        "id": str(dataset["_id"]),
+        "id": dataset_id,
         "filename": dataset["filename"],
-        "upload_date": dataset["upload_date"].isoformat(),
+        "upload_date": dataset["upload_date"],
         "row_count": dataset["row_count"],
         "column_count": dataset["column_count"],
         "columns": dataset["columns"],
@@ -382,25 +364,15 @@ async def get_dataset_summary(
     current_user: dict = Depends(get_current_user)
 ):
     """Get aggregated data for charts"""
-    datasets = get_datasets_collection()
+    datasets = read_datasets()
     
-    # Convert string ID to ObjectId
-    try:
-        obj_id = ObjectId(dataset_id)
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid dataset ID format"
-        )
-    
-    # Find dataset
-    dataset = await datasets.find_one({"_id": obj_id})
-    
-    if not dataset:
+    if dataset_id not in datasets:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Dataset not found"
         )
+    
+    dataset = datasets[dataset_id]
     
     if dataset["user_email"] != current_user["email"]:
         raise HTTPException(
@@ -474,25 +446,15 @@ async def delete_dataset(
     current_user: dict = Depends(get_current_user)
 ):
     """Delete a dataset"""
-    datasets = get_datasets_collection()
+    datasets = read_datasets()
     
-    # Convert string ID to ObjectId
-    try:
-        obj_id = ObjectId(dataset_id)
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid dataset ID format"
-        )
-    
-    # Find dataset first to verify ownership
-    dataset = await datasets.find_one({"_id": obj_id})
-    
-    if not dataset:
+    if dataset_id not in datasets:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Dataset not found"
         )
+    
+    dataset = datasets[dataset_id]
     
     if dataset["user_email"] != current_user["email"]:
         raise HTTPException(
@@ -500,12 +462,13 @@ async def delete_dataset(
             detail="Not authorized to delete this dataset"
         )
     
-    # Delete from MongoDB
-    await datasets.delete_one({"_id": obj_id})
+    # Delete from local storage
+    del datasets[dataset_id]
+    write_datasets(datasets)
     
     return {"message": "Dataset deleted successfully"}
 
-# Run with: uvicorn main_mongodb:app --reload --port 8001
+# Run with: uvicorn main:app --reload --port 8000
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

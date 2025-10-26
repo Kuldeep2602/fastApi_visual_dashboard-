@@ -1,0 +1,12 @@
+{
+  "test@example.com": {
+    "hashed_password": "$2b$12$4PSBt79drsghFGjMg0VMSO3o6ZDCm2yNexMd0DbSCcqvO0KXAnJjW",
+    "role": "user",
+    "created_at": "2025-10-26T05:00:19.201430"
+  },
+  "kuldeeprathore1637@gmail.com": {
+    "hashed_password": "$2b$12$x4rr4eiNX4d9fA3J9jeY1uqTu52vpPPxuU.TOzHxxPVkkCbC23p4a",
+    "role": "user",
+    "created_at": "2025-10-26T05:04:20.391140"
+  }
+}

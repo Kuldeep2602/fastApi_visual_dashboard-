@@ -1,0 +1,679 @@
+{
+  "1": {
+    "filename": "sample_sales_data.xlsx",
+    "user_email": "kuldeeprathore1637@gmail.com",
+    "upload_date": "2025-10-26T05:14:48.079868",
+    "row_count": 20,
+    "column_count": 5,
+    "columns": [
+      "Date",
+      "Product",
+      "Category",
+      "Units_Sold",
+      "Revenue"
+    ],
+    "file_size": 6056,
+    "data": [
+      {
+        "Date": "2025-01-01",
+        "Product": "Laptop",
+        "Category": "Electronics",
+        "Units_Sold": 10,
+        "Revenue": 50000
+      },
+      {
+        "Date": "2025-01-02",
+        "Product": "Phone",
+        "Category": "Electronics",
+        "Units_Sold": 15,
+        "Revenue": 30000
+      },
+      {
+        "Date": "2025-01-03",
+        "Product": "Tablet",
+        "Category": "Electronics",
+        "Units_Sold": 7,
+        "Revenue": 14000
+      },
+      {
+        "Date": "2025-01-04",
+        "Product": "Monitor",
+        "Category": "Accessories",
+        "Units_Sold": 12,
+        "Revenue": 24000
+      },
+      {
+        "Date": "2025-01-05",
+        "Product": "Headphones",
+        "Category": "Accessories",
+        "Units_Sold": 20,
+        "Revenue": 10000
+      },
+      {
+        "Date": "2025-01-06",
+        "Product": "Laptop",
+        "Category": "Electronics",
+        "Units_Sold": 18,
+        "Revenue": 60000
+      },
+      {
+        "Date": "2025-01-07",
+        "Product": "Phone",
+        "Category": "Electronics",
+        "Units_Sold": 22,
+        "Revenue": 44000
+      },
+      {
+        "Date": "2025-01-08",
+        "Product": "Tablet",
+        "Category": "Electronics",
+        "Units_Sold": 9,
+        "Revenue": 18000
+      },
+      {
+        "Date": "2025-01-09",
+        "Product": "Monitor",
+        "Category": "Accessories",
+        "Units_Sold": 14,
+        "Revenue": 28000
+      },
+      {
+        "Date": "2025-01-10",
+        "Product": "Headphones",
+        "Category": "Accessories",
+        "Units_Sold": 11,
+        "Revenue": 22000
+      },
+      {
+        "Date": "2025-01-11",
+        "Product": "Laptop",
+        "Category": "Electronics",
+        "Units_Sold": 17,
+        "Revenue": 35000
+      },
+      {
+        "Date": "2025-01-12",
+        "Product": "Phone",
+        "Category": "Electronics",
+        "Units_Sold": 19,
+        "Revenue": 38000
+      },
+      {
+        "Date": "2025-01-13",
+        "Product": "Tablet",
+        "Category": "Electronics",
+        "Units_Sold": 13,
+        "Revenue": 26000
+      },
+      {
+        "Date": "2025-01-14",
+        "Product": "Monitor",
+        "Category": "Accessories",
+        "Units_Sold": 16,
+        "Revenue": 32000
+      },
+      {
+        "Date": "2025-01-15",
+        "Product": "Headphones",
+        "Category": "Accessories",
+        "Units_Sold": 25,
+        "Revenue": 50000
+      },
+      {
+        "Date": "2025-01-16",
+        "Product": "Laptop",
+        "Category": "Electronics",
+        "Units_Sold": 21,
+        "Revenue": 45000
+      },
+      {
+        "Date": "2025-01-17",
+        "Product": "Phone",
+        "Category": "Electronics",
+        "Units_Sold": 23,
+        "Revenue": 47000
+      },
+      {
+        "Date": "2025-01-18",
+        "Product": "Tablet",
+        "Category": "Electronics",
+        "Units_Sold": 10,
+        "Revenue": 20000
+      },
+      {
+        "Date": "2025-01-19",
+        "Product": "Monitor",
+        "Category": "Accessories",
+        "Units_Sold": 18,
+        "Revenue": 38000
+      },
+      {
+        "Date": "2025-01-20",
+        "Product": "Headphones",
+        "Category": "Accessories",
+        "Units_Sold": 15,
+        "Revenue": 30000
+      }
+    ]
+  },
+  "2": {
+    "filename": "customer_analytics_data.xlsx",
+    "user_email": "kuldeeprathore1637@gmail.com",
+    "upload_date": "2025-10-26T05:20:58.152802",
+    "row_count": 50,
+    "column_count": 8,
+    "columns": [
+      "Customer_ID",
+      "Name",
+      "Age",
+      "Gender",
+      "Country",
+      "Total_Purchases",
+      "Total_Spend",
+      "Last_Purchase_Date"
+    ],
+    "file_size": 7686,
+    "data": [
+      {
+        "Customer_ID": 1,
+        "Name": "Customer_1",
+        "Age": 56,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 4,
+        "Total_Spend": 580,
+        "Last_Purchase_Date": "2025-01-01"
+      },
+      {
+        "Customer_ID": 2,
+        "Name": "Customer_2",
+        "Age": 46,
+        "Gender": "Male",
+        "Country": "Germany",
+        "Total_Purchases": 5,
+        "Total_Spend": 745,
+        "Last_Purchase_Date": "2025-01-04"
+      },
+      {
+        "Customer_ID": 3,
+        "Name": "Customer_3",
+        "Age": 32,
+        "Gender": "Female",
+        "Country": "Germany",
+        "Total_Purchases": 7,
+        "Total_Spend": 504,
+        "Last_Purchase_Date": "2025-01-07"
+      },
+      {
+        "Customer_ID": 4,
+        "Name": "Customer_4",
+        "Age": 60,
+        "Gender": "Male",
+        "Country": "Germany",
+        "Total_Purchases": 13,
+        "Total_Spend": 2483,
+        "Last_Purchase_Date": "2025-01-10"
+      },
+      {
+        "Customer_ID": 5,
+        "Name": "Customer_5",
+        "Age": 25,
+        "Gender": "Female",
+        "Country": "Canada",
+        "Total_Purchases": 15,
+        "Total_Spend": 3555,
+        "Last_Purchase_Date": "2025-01-13"
+      },
+      {
+        "Customer_ID": 6,
+        "Name": "Customer_6",
+        "Age": 38,
+        "Gender": "Male",
+        "Country": "USA",
+        "Total_Purchases": 11,
+        "Total_Spend": 1969,
+        "Last_Purchase_Date": "2025-01-16"
+      },
+      {
+        "Customer_ID": 7,
+        "Name": "Customer_7",
+        "Age": 56,
+        "Gender": "Female",
+        "Country": "Canada",
+        "Total_Purchases": 4,
+        "Total_Spend": 868,
+        "Last_Purchase_Date": "2025-01-19"
+      },
+      {
+        "Customer_ID": 8,
+        "Name": "Customer_8",
+        "Age": 36,
+        "Gender": "Male",
+        "Country": "Canada",
+        "Total_Purchases": 13,
+        "Total_Spend": 3458,
+        "Last_Purchase_Date": "2025-01-22"
+      },
+      {
+        "Customer_ID": 9,
+        "Name": "Customer_9",
+        "Age": 40,
+        "Gender": "Male",
+        "Country": "USA",
+        "Total_Purchases": 7,
+        "Total_Spend": 1554,
+        "Last_Purchase_Date": "2025-01-25"
+      },
+      {
+        "Customer_ID": 10,
+        "Name": "Customer_10",
+        "Age": 28,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 19,
+        "Total_Spend": 3857,
+        "Last_Purchase_Date": "2025-01-28"
+      },
+      {
+        "Customer_ID": 11,
+        "Name": "Customer_11",
+        "Age": 28,
+        "Gender": "Male",
+        "Country": "USA",
+        "Total_Purchases": 2,
+        "Total_Spend": 284,
+        "Last_Purchase_Date": "2025-01-31"
+      },
+      {
+        "Customer_ID": 12,
+        "Name": "Customer_12",
+        "Age": 41,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 10,
+        "Total_Spend": 2740,
+        "Last_Purchase_Date": "2025-02-03"
+      },
+      {
+        "Customer_ID": 13,
+        "Name": "Customer_13",
+        "Age": 53,
+        "Gender": "Female",
+        "Country": "Germany",
+        "Total_Purchases": 13,
+        "Total_Spend": 3887,
+        "Last_Purchase_Date": "2025-02-06"
+      },
+      {
+        "Customer_ID": 14,
+        "Name": "Customer_14",
+        "Age": 57,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 6,
+        "Total_Spend": 702,
+        "Last_Purchase_Date": "2025-02-09"
+      },
+      {
+        "Customer_ID": 15,
+        "Name": "Customer_15",
+        "Age": 41,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 12,
+        "Total_Spend": 2604,
+        "Last_Purchase_Date": "2025-02-12"
+      },
+      {
+        "Customer_ID": 16,
+        "Name": "Customer_16",
+        "Age": 20,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 12,
+        "Total_Spend": 3108,
+        "Last_Purchase_Date": "2025-02-15"
+      },
+      {
+        "Customer_ID": 17,
+        "Name": "Customer_17",
+        "Age": 39,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 11,
+        "Total_Spend": 1793,
+        "Last_Purchase_Date": "2025-02-18"
+      },
+      {
+        "Customer_ID": 18,
+        "Name": "Customer_18",
+        "Age": 19,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 7,
+        "Total_Spend": 812,
+        "Last_Purchase_Date": "2025-02-21"
+      },
+      {
+        "Customer_ID": 19,
+        "Name": "Customer_19",
+        "Age": 41,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 1,
+        "Total_Spend": 220,
+        "Last_Purchase_Date": "2025-02-24"
+      },
+      {
+        "Customer_ID": 20,
+        "Name": "Customer_20",
+        "Age": 61,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 1,
+        "Total_Spend": 143,
+        "Last_Purchase_Date": "2025-02-27"
+      },
+      {
+        "Customer_ID": 21,
+        "Name": "Customer_21",
+        "Age": 47,
+        "Gender": "Female",
+        "Country": "Canada",
+        "Total_Purchases": 13,
+        "Total_Spend": 2678,
+        "Last_Purchase_Date": "2025-03-02"
+      },
+      {
+        "Customer_ID": 22,
+        "Name": "Customer_22",
+        "Age": 55,
+        "Gender": "Female",
+        "Country": "India",
+        "Total_Purchases": 9,
+        "Total_Spend": 2502,
+        "Last_Purchase_Date": "2025-03-05"
+      },
+      {
+        "Customer_ID": 23,
+        "Name": "Customer_23",
+        "Age": 19,
+        "Gender": "Male",
+        "Country": "India",
+        "Total_Purchases": 3,
+        "Total_Spend": 501,
+        "Last_Purchase_Date": "2025-03-08"
+      },
+      {
+        "Customer_ID": 24,
+        "Name": "Customer_24",
+        "Age": 38,
+        "Gender": "Male",
+        "Country": "USA",
+        "Total_Purchases": 7,
+        "Total_Spend": 1897,
+        "Last_Purchase_Date": "2025-03-11"
+      },
+      {
+        "Customer_ID": 25,
+        "Name": "Customer_25",
+        "Age": 50,
+        "Gender": "Female",
+        "Country": "Germany",
+        "Total_Purchases": 6,
+        "Total_Spend": 996,
+        "Last_Purchase_Date": "2025-03-14"
+      },
+      {
+        "Customer_ID": 26,
+        "Name": "Customer_26",
+        "Age": 29,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 8,
+        "Total_Spend": 1336,
+        "Last_Purchase_Date": "2025-03-17"
+      },
+      {
+        "Customer_ID": 27,
+        "Name": "Customer_27",
+        "Age": 39,
+        "Gender": "Female",
+        "Country": "Germany",
+        "Total_Purchases": 9,
+        "Total_Spend": 1962,
+        "Last_Purchase_Date": "2025-03-20"
+      },
+      {
+        "Customer_ID": 28,
+        "Name": "Customer_28",
+        "Age": 61,
+        "Gender": "Female",
+        "Country": "India",
+        "Total_Purchases": 5,
+        "Total_Spend": 735,
+        "Last_Purchase_Date": "2025-03-23"
+      },
+      {
+        "Customer_ID": 29,
+        "Name": "Customer_29",
+        "Age": 42,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 1,
+        "Total_Spend": 58,
+        "Last_Purchase_Date": "2025-03-26"
+      },
+      {
+        "Customer_ID": 30,
+        "Name": "Customer_30",
+        "Age": 44,
+        "Gender": "Female",
+        "Country": "Canada",
+        "Total_Purchases": 19,
+        "Total_Spend": 2812,
+        "Last_Purchase_Date": "2025-03-29"
+      },
+      {
+        "Customer_ID": 31,
+        "Name": "Customer_31",
+        "Age": 59,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 10,
+        "Total_Spend": 2860,
+        "Last_Purchase_Date": "2025-04-01"
+      },
+      {
+        "Customer_ID": 32,
+        "Name": "Customer_32",
+        "Age": 45,
+        "Gender": "Female",
+        "Country": "Germany",
+        "Total_Purchases": 12,
+        "Total_Spend": 2040,
+        "Last_Purchase_Date": "2025-04-04"
+      },
+      {
+        "Customer_ID": 33,
+        "Name": "Customer_33",
+        "Age": 33,
+        "Gender": "Male",
+        "Country": "UK",
+        "Total_Purchases": 15,
+        "Total_Spend": 1770,
+        "Last_Purchase_Date": "2025-04-07"
+      },
+      {
+        "Customer_ID": 34,
+        "Name": "Customer_34",
+        "Age": 32,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 9,
+        "Total_Spend": 2538,
+        "Last_Purchase_Date": "2025-04-10"
+      },
+      {
+        "Customer_ID": 35,
+        "Name": "Customer_35",
+        "Age": 64,
+        "Gender": "Male",
+        "Country": "USA",
+        "Total_Purchases": 17,
+        "Total_Spend": 4607,
+        "Last_Purchase_Date": "2025-04-13"
+      },
+      {
+        "Customer_ID": 36,
+        "Name": "Customer_36",
+        "Age": 61,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 17,
+        "Total_Spend": 2771,
+        "Last_Purchase_Date": "2025-04-16"
+      },
+      {
+        "Customer_ID": 37,
+        "Name": "Customer_37",
+        "Age": 20,
+        "Gender": "Female",
+        "Country": "Canada",
+        "Total_Purchases": 12,
+        "Total_Spend": 1572,
+        "Last_Purchase_Date": "2025-04-19"
+      },
+      {
+        "Customer_ID": 38,
+        "Name": "Customer_38",
+        "Age": 54,
+        "Gender": "Male",
+        "Country": "UK",
+        "Total_Purchases": 7,
+        "Total_Spend": 553,
+        "Last_Purchase_Date": "2025-04-22"
+      },
+      {
+        "Customer_ID": 39,
+        "Name": "Customer_39",
+        "Age": 24,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 2,
+        "Total_Spend": 42,
+        "Last_Purchase_Date": "2025-04-25"
+      },
+      {
+        "Customer_ID": 40,
+        "Name": "Customer_40",
+        "Age": 38,
+        "Gender": "Male",
+        "Country": "Canada",
+        "Total_Purchases": 3,
+        "Total_Spend": 819,
+        "Last_Purchase_Date": "2025-04-28"
+      },
+      {
+        "Customer_ID": 41,
+        "Name": "Customer_41",
+        "Age": 26,
+        "Gender": "Female",
+        "Country": "India",
+        "Total_Purchases": 17,
+        "Total_Spend": 2703,
+        "Last_Purchase_Date": "2025-05-01"
+      },
+      {
+        "Customer_ID": 42,
+        "Name": "Customer_42",
+        "Age": 56,
+        "Gender": "Female",
+        "Country": "UK",
+        "Total_Purchases": 5,
+        "Total_Spend": 280,
+        "Last_Purchase_Date": "2025-05-04"
+      },
+      {
+        "Customer_ID": 43,
+        "Name": "Customer_43",
+        "Age": 35,
+        "Gender": "Male",
+        "Country": "USA",
+        "Total_Purchases": 17,
+        "Total_Spend": 3043,
+        "Last_Purchase_Date": "2025-05-07"
+      },
+      {
+        "Customer_ID": 44,
+        "Name": "Customer_44",
+        "Age": 21,
+        "Gender": "Female",
+        "Country": "India",
+        "Total_Purchases": 17,
+        "Total_Spend": 476,
+        "Last_Purchase_Date": "2025-05-10"
+      },
+      {
+        "Customer_ID": 45,
+        "Name": "Customer_45",
+        "Age": 42,
+        "Gender": "Male",
+        "Country": "India",
+        "Total_Purchases": 17,
+        "Total_Spend": 4284,
+        "Last_Purchase_Date": "2025-05-13"
+      },
+      {
+        "Customer_ID": 46,
+        "Name": "Customer_46",
+        "Age": 31,
+        "Gender": "Female",
+        "Country": "Germany",
+        "Total_Purchases": 2,
+        "Total_Spend": 236,
+        "Last_Purchase_Date": "2025-05-16"
+      },
+      {
+        "Customer_ID": 47,
+        "Name": "Customer_47",
+        "Age": 26,
+        "Gender": "Male",
+        "Country": "Canada",
+        "Total_Purchases": 2,
+        "Total_Spend": 332,
+        "Last_Purchase_Date": "2025-05-19"
+      },
+      {
+        "Customer_ID": 48,
+        "Name": "Customer_48",
+        "Age": 43,
+        "Gender": "Male",
+        "Country": "UK",
+        "Total_Purchases": 5,
+        "Total_Spend": 1135,
+        "Last_Purchase_Date": "2025-05-22"
+      },
+      {
+        "Customer_ID": 49,
+        "Name": "Customer_49",
+        "Age": 19,
+        "Gender": "Female",
+        "Country": "USA",
+        "Total_Purchases": 1,
+        "Total_Spend": 150,
+        "Last_Purchase_Date": "2025-05-25"
+      },
+      {
+        "Customer_ID": 50,
+        "Name": "Customer_50",
+        "Age": 37,
+        "Gender": "Female",
+        "Country": "Germany",
+        "Total_Purchases": 1,
+        "Total_Spend": 171,
+        "Last_Purchase_Date": "2025-05-28"
+      }
+    ]
+  }
+}
