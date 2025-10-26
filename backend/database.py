@@ -6,19 +6,14 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from typing import Optional
 from urllib.parse import quote_plus
 import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-
-# MongoDB credentials from environment variables (URL encode special characters)
-username = quote_plus(os.getenv("MONGODB_USERNAME"))
-password = quote_plus(os.getenv("MONGODB_PASSWORD"))
-cluster = os.getenv("MONGODB_CLUSTER")
+# MongoDB credentials (URL encode special characters)
+username = quote_plus("kuldeeprathore1637")
+password = quote_plus("Kuldeep@123")
 
 # MongoDB Connection String
-MONGODB_URL = f"mongodb+srv://{username}:{password}@{cluster}/?retryWrites=true&w=majority&appName=Cluster0"
-DATABASE_NAME = os.getenv("MONGODB_DATABASE", "dataviz_pro")
+MONGODB_URL = f"mongodb+srv://{username}:{password}@cluster0.fubjnog.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+DATABASE_NAME = "dataviz_pro"
 
 # Global client instance
 client: Optional[AsyncIOMotorClient] = None

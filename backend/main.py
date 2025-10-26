@@ -10,10 +10,6 @@ import pandas as pd
 import io
 import os
 from pydantic import BaseModel, EmailStr
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Import database configuration
 from database import (
@@ -24,10 +20,10 @@ from database import (
     create_indexes
 )
 
-# Configuration from environment variables
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
+# Configuration
+SECRET_KEY = "your-secret-key-change-in-production-12345678"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # Initialize FastAPI
 app = FastAPI(title="DataViz Pro API - MongoDB", version="2.0.0")
